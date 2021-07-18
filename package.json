@@ -2,7 +2,7 @@
   "name": "SpeedTest",
   "author": "Jonatas",
   "description": "A simple http speed test for private networks.",
-  "version": "1.0.1",
+  "version": "0.0.1",
   "contributors": [
     {
       "name": "Jonatas Souza",
