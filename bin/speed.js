@@ -7,7 +7,7 @@ var _config = require("./config.json");
 var opts = {
     url: [],
     "limits": _config.limits,
-    "port": process.env.ST_PORT || _config.port || 8080,
+    "port": process.env.port || process.env.PORT || process.env.ST_PORT || _config.port || 8080,
     "ip": process.env.ST_ADDR || _config.ip || "0.0.0.0"
 };
 
