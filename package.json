@@ -1,0 +1,31 @@
+{
+  "name": "SpeedTest",
+  "author": "Jonatas",
+  "description": "A simple http speed test for private networks.",
+  "version": "1.0.1",
+  "contributors": [
+    {
+      "name": "Jonatas Souza",
+      "email": "soaresjonatas398@gmail.com"
+    }
+  ],
+  "keywords": [
+    "http",
+    "speed test"
+  ],
+  "scripts": {
+    "start": "node ./bin/speed.js",
+    "dev": "nodemon start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jonatasJS/SpeedTest.git"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=4.5.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12"
+  }
+}

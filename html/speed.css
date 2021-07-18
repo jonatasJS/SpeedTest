@@ -1,0 +1,17 @@
+body {
+  padding: 20px;
+}
+
+.tableout {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.result ul {
+  list-style-type:none;  
+}
+
+.results-details {
+  text-indent: 2em;
+}

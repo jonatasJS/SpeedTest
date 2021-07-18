@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <base href="./" />
+  <link rel="stylesheet" type="text/css" href="./speed.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+  <title>NodeJS HTTP Speedtest: All for WAN and WAN for all</title>
+</head>
+<body ng-app="app">
+  <div ng-controller="all">
+    <div id="jswarning" ng-hide="!!$loaded">You need to use a browser that supports Javascript and AJAX.</div>
+    <div ng-hide="!!!$loaded" class="ng-hide">
+      <button type="button" ng-click="$startDownload()" class="btn btn-success download" ng-disabled="!!current.all">Download</button>
+      <button type="button" ng-click="$startUpload()" class="btn btn-primary" ng-disabled="!!current.all">Upload</button>
+      <button type="button" ng-click="$startBoth()" class="btn btn-info" ng-disabled="!!current.all">Both</button>
+      <button type="button" ng-click="$stopTests();" class="btn btn-danger" ng-disabled="!!!current.all">Stop</button>
+      <button type="button" ng-click="$startDownloadStress()" class="btn btn-outline-success download" ng-disabled="!!current.all">Download Stress</button>
+      <button type="button" ng-click="$startUploadStress()" class="btn btn-outline-primary download" ng-disabled="!!current.all">Upload Stress</button>
+      <button type="button" ng-click="$downloadCSV()" class="btn btn-outline-warning btn-success" ng-disabled="!!!results.length">CSV</button>
+      <button type="button" ng-click="$clearResults()" class="btn btn-light" ng-disabled="!!current.all">Clear results</button>
+
+      <div class="tableout">
+
+        <h3>
+          Running test:
+          <span ng-show="!!current.upload && !!!current.download">Upload</span>
+          <span ng-show="!!current.download && !!!current.upload">Download</span>
+          <span ng-show="!!current.download && !!current.upload">Download/Upload</span>
+          <span ng-show="!!!current.download && !!!current.upload">None</span>
+        </h3>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Started</th>
+              <th>Direction</th>
+              <th>Size</th>
+              <th>Downloaded</th>
+              <th>Time (sec)</th>
+              <th>Speed</th>
+              <th>%</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="step in current.all | orderObjectBy:'start':true" ng-include src="'/results-td.html'"></tr>
+          </tbody>
+          <tbody>
+            <tr ng-repeat="step in results | orderBy:'start':true" ng-include src="'/results-td.html'"></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/ng-template" id="/results-td.html">
+      <td>{{step.start | date:'yyyyMMdd HH:mm:ss:sss '}}</td>
+      <td>{{step.dir}}</td>
+      <td>{{step.fsize.toFixed(2)}}{{step.fsizetype}}</td>
+      <td>{{step.downloaded}}</td>
+      <td>{{((step.time/1000)%60).toFixed(1)}}</td>
+      <td>{{step.bitrate.toFixed(2)}}{{step.bittype}}ps</td>
+      <td>{{step.percent.toFixed(0)}}</td>
+  </script>
+
+  <script type="application/javascript" src="./jquery-3.2.1.min.js" ></script>
+  <script type="application/javascript" src="./jquery.ajax-progress.js" ></script>
+  <script type="application/javascript" src="./lodash.min.js"></script>
+  <script type="application/javascript" src="./json2csv.js"></script>
+  <script type="application/javascript" src="./angular.min.js"></script>
+  <script type="application/javascript" src="./speed.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
